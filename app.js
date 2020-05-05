@@ -62,6 +62,11 @@ function show(DataAr){
     display1(active, dateAr, deceased, confirmed, recovered);
     display2(active, dateAr, deceased, confirmed, recovered);
     more(active[active.length - 1], deceased[active.length - 1],confirmed[active.length - 1],recovered[active.length - 1])
+    
+    let today = new Date();
+    
+    document.querySelector('.show-msg').innerHTML = `Showing data for current date, ${today.getDay()}/${today.getMonth()}/${today.getFullYear()}`;
+    document.querySelector('.show-msg').style.display = 'block';
 }
 
 async function getZone(district){
@@ -83,7 +88,7 @@ async function getZone(district){
 
 async function getInfo(state, district){
         
-        document.querySelector('.show-location').innerHTML = `You are currently in ${state} and in ${district} district`;
+        document.querySelector('.show-location').innerHTML = `Current location set to ${district}, ${state}`;
         document.querySelector('.show-location').style.display = 'block';
         let result = await fetch(`https://cors-anywhere.herokuapp.com/https://api.covid19india.org/districts_daily.json`);
 
@@ -102,7 +107,8 @@ async function getInfo(state, district){
         let DataAr = data.districtsDaily[state][district];
         console.log(DataAr)
         
-        document.querySelector('#auto').addEventListener('click', show(DataAr));    
+        document.querySelector('#auto').addEventListener('click', show(DataAr)); 
+        Addcountry();
     }
 
 /********************************************************************************/
@@ -142,6 +148,40 @@ async function adddistrict(arr){
 }
 
 /********************************************************************************/
+
+
+async function Addcountry(){
+    let active = [];
+    let Confirmed = [];
+    let deaths = [];
+    let lastupdated = [];
+    let state = [];
+    
+    let result = await fetch('https://cors-anywhere.herokuapp.com/https://api.covid19india.org/data.json');
+    let data = await result.json();
+    data.statewise.forEach(item => {
+        active.push(item.active);
+        Confirmed.push(item.confirmed);
+        deaths.push(item.deaths);
+        lastupdated.push(item.lastupdatedtime);
+        state.push(item.state);
+    })
+    
+    let html = '<tr><th scope="row">%num%</th><td >%state%</td><td >%active%</td><td>%confirmed%</td><td >%deaths%</td><td >%last%</td></tr>';
+    
+    for(let i = 1; i<active.length; i++){
+        var newhtml = html.replace('%num%', i);
+        newhtml = newhtml.replace('%state%', state[i]);
+        newhtml = newhtml.replace('%active%', active[i]);
+        newhtml = newhtml.replace('%confirmed%', Confirmed[i]);
+        newhtml = newhtml.replace('%deaths%', deaths[i]);
+        newhtml = newhtml.replace('%last%', lastupdated[i]);
+        
+        document.querySelector('#tbody').insertAdjacentHTML('beforeend', newhtml);
+    }
+    
+//    document.querySelector('.table').style.display = 'block';
+}
 
 
 document.querySelector('#submit').addEventListener('click', function(){

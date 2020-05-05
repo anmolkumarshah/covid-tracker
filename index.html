@@ -44,14 +44,14 @@
             display: none;
         }
         
-        .more{
+        .show-msg{
             background-color: bisque;
             padding: 20px;
             border: 1px solid black;
             border-radius: 10px;
             text-align: center;
             
-/*            display: none;*/
+            display: none;
         }
         .current{
             text-align: center;
@@ -63,6 +63,8 @@
         .card-body{
             background-color: whitesmoke;
         }
+        
+        
 
     </style>
     <title>Covid Tracker</title>
@@ -73,7 +75,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="madal-title">Select Yout Location</h1>
+                    <h1 class="madal-title">Select Your Location</h1>
                     <button type="button" class="close" data-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
@@ -125,7 +127,10 @@
     </div>
     <canvas id="mychart1"></canvas>
     <canvas id="mychart2"></canvas>
-                <div class="current">
+               
+    <div class="container-fluid">
+           <h1 class="show-msg"></h1>
+           <div class="current">
                 <div class="row">
                     <div class="col-6 top">
                         <div class="card">
@@ -149,7 +154,45 @@
                     </div>
                 </div>
             </div>
+    </div>
+    
+    
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">State</th>
+          <th scope="col">Active</th>
+          <th scope="col">Confirmed</th>
+          <th scope="col">deaths</th>
+          <th scope="col">last updated</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <!--<tr>
+          <th scope="row" id="num">1</th>
+          <td id="stateName">Mark</td>
+          <td id="active">Otto</td>
+          <td id="confirmed">@mdo</td>
+           <td id="deaths">@mdo</td>
+           <td id="lastupdatedtime">@mdo</td>
+        </tr>-->        
+      </tbody>
+</table>
+
     <script src="app.js"></script>
+    
+    <footer class="page-footer bg-dark">
+        <div class="row">
+            <div class="col-6 text-white p-3">
+                <h3>made with <span>&#10084</span> by AnmolKumar Shah</h3>
+            </div>
+            <div class="col-6">
+                <h6 class="text-white p-3 text-center">All information can very from the actual current data</h6>
+                <h5 class="text-white text-center">powered by covid19india/api</h5>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>
