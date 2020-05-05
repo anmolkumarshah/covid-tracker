@@ -57,7 +57,7 @@ function show(DataAr){
     DataAr.forEach(item => confirmed.push(item.confirmed));
     DataAr.forEach(item => recovered.push(item.recovered));
     
-    console.log(active, dateAr, deceased, confirmed, recovered);
+//    console.log(active, dateAr, deceased, confirmed, recovered);
     
     display1(active, dateAr, deceased, confirmed, recovered);
     display2(active, dateAr, deceased, confirmed, recovered);
@@ -72,7 +72,7 @@ function show(DataAr){
 async function getZone(district){
     let data = await fetch('https://cors-anywhere.herokuapp.com/https://api.covid19india.org/zones.json');
     let result = await data.json();
-    console.log(result.zones)
+//    console.log(result.zones)
     result.zones.forEach((item) => {
         if(item.district === district){
             document.querySelector('.show-zone').innerHTML = `${district} is in ${item.zone} zone`;
@@ -105,7 +105,7 @@ async function getInfo(state, district){
 //        adddistrict(listDistrict);  
     
         let DataAr = data.districtsDaily[state][district];
-        console.log(DataAr)
+//        console.log(DataAr)
         
         document.querySelector('#auto').addEventListener('click', show(DataAr)); 
         Addcountry();
