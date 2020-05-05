@@ -53,6 +53,16 @@
             
 /*            display: none;*/
         }
+        .current{
+            text-align: center;
+            display: none;
+        }
+        .top{
+            margin: 30px 0px;
+        }
+        .card-body{
+            background-color: whitesmoke;
+        }
 
     </style>
     <title>Covid Tracker</title>
@@ -71,7 +81,7 @@
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label for="inputGroupSelect" class="input-group-text">State</label>
-                            <select id="state" class="custom-select">
+                            <select id="state">
                                 <option selected>Choose..</option>
 <!--                                <option value="Ahmadnagar">Ahmadnagar</option>-->
                             </select>
@@ -112,13 +122,33 @@
     <div class="container-fluid">
             <h1 class="show-location"></h1>
             <h1 class="show-zone"></h1>
-            <canvas id="mychart1">
-
-            </canvas>
-            <canvas id="mychart2">
-
-            </canvas>
     </div>
+    <canvas id="mychart1"></canvas>
+    <canvas id="mychart2"></canvas>
+                <div class="current">
+                <div class="row">
+                    <div class="col-sm-6 top">
+                        <div class="card">
+                          <div class="card-header bg-primary h1" id="">Active</div>
+                          <div class="card-body display-4" id="active"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 top" >
+                          <div class="card-header bg-primary h1">Decreased</div>
+                          <div class="card-body display-4" id="decreased"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 top">
+                          <div class="card-header bg-primary h1">Confirmed</div>
+                          <div class="card-body display-4" id="confirmed"></div>
+                    </div>
+                    <div class="col-sm-6 top">
+                            <div class="card-header bg-primary h1">Recovered</div>
+                           <div class="card-body display-4" id="recovered"></div>
+                    </div>
+                </div>
+            </div>
     <script src="app.js"></script>
 </body>
 

@@ -35,6 +35,15 @@ async function getLocation(latitude, longitude){
 //        getMore(district);
 }
 
+function more(active, deceased, confirmed, recovered){
+    document.querySelector('#active').innerHTML = active;
+    document.querySelector('#decreased').innerHTML = deceased;
+    document.querySelector('#confirmed').innerHTML = confirmed;
+    document.querySelector('#recovered').innerHTML = recovered;
+    
+    document.querySelector('.current').style.display = "block";
+}
+
 function show(DataAr){
     let active = [];
     let dateAr = [];
@@ -52,6 +61,7 @@ function show(DataAr){
     
     display1(active, dateAr, deceased, confirmed, recovered);
     display2(active, dateAr, deceased, confirmed, recovered);
+    more(active[active.length - 1], deceased[active.length - 1],confirmed[active.length - 1],recovered[active.length - 1])
 }
 
 async function getZone(district){
@@ -60,7 +70,6 @@ async function getZone(district){
     console.log(result.zones)
     result.zones.forEach((item) => {
         if(item.district === district){
-//            console.log(item.zone)
             document.querySelector('.show-zone').innerHTML = `${district} is in ${item.zone} zone`;
             document.querySelector('.show-zone').style.backgroundColor = `${item.zone}`;
             document.querySelector('.show-zone').style.display = 'block';
@@ -96,6 +105,9 @@ async function getInfo(state, district){
         document.querySelector('#auto').addEventListener('click', show(DataAr));    
     }
 
+/********************************************************************************/
+/* ADD STATE */
+
 async function addState(arr){
     let html = '<option value="%value%">%value%</option>';
     for(let i=0; i<arr.length; i++){
@@ -104,6 +116,8 @@ async function addState(arr){
        document.querySelector('#state').insertAdjacentHTML('beforeend', newhtml);  
     }   
 }
+/********************************************************************************/
+
 
 let inputState = document.querySelector('#state');
 async function temp(){
@@ -116,14 +130,19 @@ async function temp(){
 
 inputState.addEventListener('input',temp)
 
+/********************************************************************************/
+/* ADD DISTRICT */
 async function adddistrict(arr){
-    let html = '<option value="%value%">%value%</option>';
+    let html = '<option  class="option" value="%value%">%value%</option>';
     for(let i=0; i<arr.length; i++){
        let newhtml = html.replace('%value%', arr[i]); 
        newhtml = newhtml.replace('%value%', arr[i]);
        document.querySelector('#dist').insertAdjacentHTML('beforeend', newhtml);  
     }   
 }
+
+/********************************************************************************/
+
 
 document.querySelector('#submit').addEventListener('click', function(){
     if(document.querySelector('#state').value !== 'Choose..' && document.querySelector('#dist').value !== 'Choose..')
@@ -208,7 +227,7 @@ Chart.defaults.global.defaultFontSize = 20;
 Chart.defaults.global.defaultFontColor = 'Black';*/
     
         let covid2 = new Chart(ctx2, {
-        type : 'bar',
+        type : 'line',
         data : {
             labels : dateAr,
             datasets : [
