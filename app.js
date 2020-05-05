@@ -65,7 +65,7 @@ function show(DataAr){
     
     let today = new Date();
     
-    document.querySelector('.show-msg').innerHTML = `Showing data for current date, ${today.getDay()}/${today.getMonth()}/${today.getFullYear()}`;
+    document.querySelector('.show-msg').innerHTML = `Showing data for current date,${dateAr[dateAr.length - 1]}`;
     document.querySelector('.show-msg').style.display = 'block';
 }
 
