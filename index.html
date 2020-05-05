@@ -1,155 +1,19 @@
 <!DOCTYPE html>
-<html lang="">
-
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <style>
-        body{
-            background-color:navajowhite;
-        }
-        .jumbotron {
-            background-color: #9575CD;
-        }
-
-        canvas {
-            display: none;
-        }
-        
-        .input-group-prependP{
-            font-size: 67px;
-/*            color: forestgreen*/
-        }
-        .show-location{
-            background-color: bisque;
-            padding: 20px;
-            border: 1px solid black;
-            border-radius: 10px;
-            text-align: center;
-            display: none;
-        }
-        
-        .show-zone{
-            background-color: bisque;
-            padding: 20px;
-            border: 1px solid black;
-            border-radius: 10px;
-            text-align: center;
-            
-            display: none;
-        }
-        
-        .more{
-            background-color: bisque;
-            padding: 20px;
-            border: 1px solid black;
-            border-radius: 10px;
-            text-align: center;
-            
-/*            display: none;*/
-        }
-        .current{
-            text-align: center;
-            display: none;
-        }
-        .top{
-            margin: 30px 0px;
-        }
-        .card-body{
-            background-color: whitesmoke;
-        }
-
-    </style>
-    <title>Covid Tracker</title>
+    <title> chart in js </title>
 </head>
 
 <body>
-    <div class="modal fade" role="dialog" id="mymodal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="madal-title">Select Yout Location</h1>
-                    <button type="button" class="close" data-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="display-4" id="input-state"></div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label for="inputGroupSelect" class="input-group-text">State</label>
-                            <select id="state">
-                                <option selected>Choose..</option>
-<!--                                <option value="Ahmadnagar">Ahmadnagar</option>-->
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label for="inputGroupSelect" class="input-group-text">District</label>
-                            <select id="dist" class="custom-select">
-                                <option selected>Choose..</option>
-<!--                                <option value="Ahmadnagar">Ahmadnagar</option>-->
-                            </select>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="modal-footer">
-                    <div class="btn btn-danger" id="submit" data-dismiss="modal">Submit</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="jumbotron">
-        <div class="row">
-            <div class="col-sm-6 pb-4">
-                <div class="display-2 text-white">COVID-19 Tracker</div>
-                <div class="display-4">a covid-19 Statistics Visualizer</div>
-            </div>
-            <div class="col-sm-6 text-center text-center align-items-center h-100">
-                <div class=" col-sm-6 btn btn-warning btn-blk mb-1 px-3" id="auto">Automatically Find location</div>
-                <div class="col-sm-6 btn btn-warning btn-blk px-3" id="manual" data-toggle='modal' data-target="#mymodal">Manually feed location</div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="container-fluid">
-            <h1 class="show-location"></h1>
-            <h1 class="show-zone"></h1>
-    </div>
-    <canvas id="mychart1"></canvas>
-    <canvas id="mychart2"></canvas>
-                <div class="current">
-                <div class="row">
-                    <div class="col-sm-6 top">
-                        <div class="card">
-                          <div class="card-header bg-primary h1" id="">Active</div>
-                          <div class="card-body display-4" id="active"></div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 top" >
-                          <div class="card-header bg-primary h1">Decreased</div>
-                          <div class="card-body display-4" id="decreased"></div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 top">
-                          <div class="card-header bg-primary h1">Confirmed</div>
-                          <div class="card-body display-4" id="confirmed"></div>
-                    </div>
-                    <div class="col-sm-6 top">
-                            <div class="card-header bg-primary h1">Recovered</div>
-                           <div class="card-body display-4" id="recovered"></div>
-                    </div>
-                </div>
-            </div>
-    <script src="app.js"></script>
+    <div class="container">
+        <canvas id="mychart">
+            
+        </canvas>
+    </div> 
+    <script src="app.js"></script>   
 </body>
-
 </html>
